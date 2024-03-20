@@ -2,8 +2,11 @@
 
 import {useState} from 'react';
 import MenuLink from './MenuLink'
+import useLoginModal from '@/app/hooks/useLoginModal'
 
 const UserNav = () => {
+    const loginModal = useLoginModal();
+
     const [isOpen, setIsOpen] = useState(false)
     return (
             <div onClick={() => setIsOpen(!isOpen)} className="px-4 py-3 cursor-pointer relative inline-block border rounded-full hover:shadow-lg transition dark:hover:shadow-black/30">
@@ -23,7 +26,12 @@ const UserNav = () => {
 
                 {isOpen && (
                     <div className="w-[200px] py-3 absolute top-[60px] right-0 bg-white border rounded-xl shadow-md flex flex-col cursor-pointer">
-                        <MenuLink label='Log in' onClick={() => console.log('Clicked')}   />
+                        <MenuLink label='Log in' onClick={() => {
+                            console.log('Clicked in login button')
+                            setIsOpen(false);
+                            loginModal.open()
+                            }}
+                        />
                         <MenuLink label='Sign up'  onClick={() => console.log('Clicked')} />
                         <hr/>
                         <MenuLink label='Help Center'  onClick={() => console.log('Clicked')} className="mt-2"/>
