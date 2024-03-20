@@ -10,11 +10,13 @@ const MenuLink: React.FC<MenuLinkProps> = ({
     onClick
 }) => {
     return (
-        <p
+        <div
             onClick={onClick}
-            className={`p-3 hover:bg-gray-100 transition ${className}`}>
-            {label}
-        </p>
+            className={`py-2 mb-2 hover:bg-gray-100 transition ${className}`}>
+            <p className="pl-3">
+                {label}
+            </p>
+        </div>
     )
 }
 

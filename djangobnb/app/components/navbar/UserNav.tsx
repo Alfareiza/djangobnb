@@ -22,9 +22,11 @@ const UserNav = () => {
                 {/* END ICONS OF MENU OF HEADER */}
 
                 {isOpen && (
-                    <div className="w-[200px] absolute top-[60px] right-0 bg-white border rounded-xl shadow-md flex flex-col cursor-pointer">
+                    <div className="w-[200px] py-3 absolute top-[60px] right-0 bg-white border rounded-xl shadow-md flex flex-col cursor-pointer">
                         <MenuLink label='Log in' onClick={() => console.log('Clicked')}   />
-                        <MenuLink label='Sign up'  onClick={() => console.log('Clicked', isOpen)} />
+                        <MenuLink label='Sign up'  onClick={() => console.log('Clicked')} />
+                        <hr/>
+                        <MenuLink label='Help Center'  onClick={() => console.log('Clicked')} className="mt-2"/>
                     </div>
                 )}
 
