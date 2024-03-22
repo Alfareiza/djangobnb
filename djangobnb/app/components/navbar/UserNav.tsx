@@ -2,10 +2,17 @@
 
 import {useState} from 'react';
 import MenuLink from './MenuLink'
+import LogoutButton from '@/app/components/LogoutButton'
 import useLoginModal from '@/app/hooks/useLoginModal'
 import useSignupModal from '@/app/hooks/useSignupModal'
 
-const UserNav = () => {
+interface UserNavProps {
+    userId?: string | null; // This indicates that the value may comes or not
+}
+
+const UserNav: React.FC<UserNavProps> = ({
+    userId
+}) => {
     const loginModal = useLoginModal();
     const signupModal = useSignupModal();
 
@@ -28,19 +35,26 @@ const UserNav = () => {
 
                 {isOpen && (
                     <div className="w-[200px] py-3 absolute top-[60px] right-0 bg-white border rounded-xl shadow-md flex flex-col cursor-pointer">
-                        <MenuLink label='Log in' onClick={() => {
-                            console.log('Clicked in login button')
-                            setIsOpen(false);
-                            loginModal.open()
-                            }}
-                        />
+                        {/* If the userId is found in the cookies then is shown the log out button */}
+                        { userId ? (
+                            <LogoutButton/>
+                        ) : (
+                            <>
+                                <MenuLink label='Log in' onClick={() => {
+                                    console.log('Clicked in login button')
+                                    setIsOpen(false);
+                                    loginModal.open()
+                                    }}
+                                />
 
-                       <MenuLink label='Sign up' onClick={() => {
-                            console.log('Clicked in signup button')
-                            setIsOpen(false);
-                            signupModal.open()
-                            }}
-                        />
+                               <MenuLink label='Sign up' onClick={() => {
+                                    console.log('Clicked in signup button')
+                                    setIsOpen(false);
+                                    signupModal.open()
+                                    }}
+                                />
+                            </>
+                        )}
                         <hr/>
                         <MenuLink label='Help Center'  onClick={() => console.log('Clicked')} className="mt-2"/>
                     </div>
