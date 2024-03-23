@@ -14,6 +14,8 @@ import {useRouter} from 'next/navigation'
 const AddPropertyModal = () => {
     // States
     const [currentStep, setCurrentStep] = useState(1);
+
+    // Data collected from the wizard
     const [dataCategory, setDataCategory] = useState('');
     const [dataTitle, setDataTitle] = useState('');
     const [dataDescription, setDataDescription] = useState('');
@@ -23,6 +25,9 @@ const AddPropertyModal = () => {
     const [dataGuests, setDataGuests] = useState('');
     const [dataCountry, setDataCountry] = useState<SelectCountryValue>();
     const [dataImage, setDataImage] = useState<File | null>(null);
+    
+    
+    const [dataErrors, setDataErrors] = useState<string[]>([]);
     
     const addPropertyModal = useAddPropertyModal();
 
@@ -68,10 +73,14 @@ console.log(formData)
                     router.push('/')
                     addPropertyModal.close()
                 } else{
-                    console.log('Error registered the data in the backend')
+                    console.log('Error registering data in the backend')
+                    const tmpErrors : string[] = Object.values(response).map((error: any)=>{
+                            return error;
+                    })
+                    setDataErrors(tmpErrors)
                 }
             } else {
-                console.log('Error registered the data in the backend')
+                console.log('Missing fields collected from the front')
             }
     }
 
@@ -225,6 +234,16 @@ console.log(formData)
                             </div>
                         )}
                     </div>
+                    
+                    {/* POSSIBLE ERRORS */}
+                    { dataErrors.map((error, index) => {
+                        return (
+                            <div className='p-b mb-4 bg-airbnb text-white rounded-xl opacity-80'
+                                key={index}> {error}
+                            </div>
+                        )
+                    })}
+                    {/* END POSSIBLE ERRORS */}
 
                     {/* BUTTONS NEXT AND PREVIOUS */}
                     <div className="flex flex-row items-center justify-between space-x-6">
