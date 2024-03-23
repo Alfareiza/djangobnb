@@ -60,7 +60,7 @@ const AddPropertyModal = () => {
                 formData.append('guests', dataGuests); 
                 formData.append('country_code', dataCountry.value); 
                 formData.append('country', dataCountry.label); 
-                formData.append('category', dataImage); 
+                formData.append('image', dataImage); 
 console.log(formData)
                 const response = await apiService.post('/api/properties/create/', formData)
                 if (response.success){
@@ -156,7 +156,7 @@ console.log(formData)
                             />
                         </div>
                         <div className="flex flex-col space-y-2">
-                            <label>Maximum number of uests</label>
+                            <label>Maximum number of Guests</label>
                             <input type="number" min="0" className="w-full p-4 border border-gray-600 rounded-xl"
                                 value={dataGuests}
                                 onChange={(e) => setDataGuests(e.target.value)}
