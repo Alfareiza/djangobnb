@@ -1,4 +1,5 @@
 from django.forms import ModelForm
+from rest_framework import serializers
 
 from property.models import Property
 
@@ -18,5 +19,3 @@ class PropertyForm(ModelForm):
             'category',
             'image',
         ]
-
-
