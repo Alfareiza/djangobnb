@@ -24,7 +24,7 @@ def properties_list(request):
 @permission_classes([])
 def property_detail(request, pk):
     property = Property.objects.get(pk=pk)
-    serializer = PropertiesDetailSerializer(property, many=True)
+    serializer = PropertiesDetailSerializer(property, many=False)
 
     return JsonResponse(serializer.data)
 

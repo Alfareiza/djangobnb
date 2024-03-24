@@ -2,8 +2,8 @@ import {getAccessToken} from '@/app/lib/actions'
 
 // Responsible for communication with API
 const apiService = {
-    get: async function (url: string): Promise<any> {
-        console.log('Obtaining data [GET] from ', url);
+   get: async function (url: string): Promise<any> {
+        console.log(`Obtaining data [GET] from ${process.env.NEXT_PUBLIC_API_HOST}${url}`);
 
         const token = await getAccessToken()
 
@@ -25,8 +25,7 @@ const apiService = {
                     reject(error);
                 })
         })
-    },
-
+   },
    postWithoutToken: async function(url: string, data: any): Promise<any>{
         console.log(`Requesting data=${JSON.stringify(data)} [POST] to url=${url}`);
 
@@ -73,4 +72,5 @@ const apiService = {
         })
    }
 }
+
 export default apiService;

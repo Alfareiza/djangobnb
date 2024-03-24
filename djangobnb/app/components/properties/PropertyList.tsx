@@ -12,6 +12,9 @@ export type PropertyType = {
 }
 
 const PropertyList = () => {
+    // Content shown accessing to /properties/
+    // Here, the API is called in order to get all the properties and 
+    // show them in the front trough PropertyListItem
 
     const [properties, setProperties] = useState<PropertyType[]>([]);
 

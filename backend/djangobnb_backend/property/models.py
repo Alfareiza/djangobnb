@@ -29,3 +29,9 @@ class Property(models.Model):
 
     def image_url(self):
         return f'{settings.WEBSITE_URL}{self.image.url}'
+
+    class Meta:
+        ordering = ['-created_at']
+
+        def __str__(self):
+            return self.title

@@ -20,15 +20,15 @@ class PropertiesDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Property
-        fields = [
+        fields = (
             'id',
             'title',
             'description',
-            'price_per_night'
+            'price_per_night',
             'image_url',
             'bedrooms',
             'bathrooms',
             'guests',
             'country',
             'host'
-        ]
+        )
