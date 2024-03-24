@@ -24,10 +24,6 @@ services:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
       - .env
-    #environment:
-    #  - POSTGRES_USER:postgresuser
-    #  - POSTGRES_PASSWORD:postgrespassword
-    #  - POSTGRES_DB=djangobnb
     healthcheck:
       test:
         [
