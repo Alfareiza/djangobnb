@@ -1,6 +1,7 @@
 import Image from "next/image";
 import ReservationSidebar from "@/app/components/properties/ReservationSidebar";
 import apiService from "@/app/services/apiService";
+import { getUserId } from "@/app/lib/actions";
 
 // export type PropertyType = {
 //     id: string
@@ -18,7 +19,7 @@ import apiService from "@/app/services/apiService";
 const PropertyDetailPage = async ({params}: { params: {id: string }}) => {
     // Content shown accesing to /properties/id_property
     const property = await apiService.get(`/api/properties/${params.id}`)
-
+    const userId = await getUserId()
     return (
             <main className="max-w-[100%] max-auto px-6 pb-6">
                 {/* IMAGE COVER OF DETAIL PROPERTY PAGE */}
@@ -65,7 +66,7 @@ const PropertyDetailPage = async ({params}: { params: {id: string }}) => {
                     {/* END LEFT PART */}
 
                     {/* RIGHT PART */}
-                    <ReservationSidebar property={property}/>
+                    <ReservationSidebar property={property} userId={userId}/>
                     {/* END RIGHT PART */}
                 </div>
                 {/* END INFORMATION OF DETAIL PROPERTY PAGE */}

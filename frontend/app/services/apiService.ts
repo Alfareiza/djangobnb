@@ -27,7 +27,7 @@ const apiService = {
         })
    },
    postWithoutToken: async function(url: string, data: any): Promise<any>{
-        console.log(`Requesting data=${JSON.stringify(data)} [POST] to url=${url}`);
+        console.log(`Requesting data=${JSON.stringify(data)} [POST] to url=${process.env.NEXT_PUBLIC_API_HOST}${url}`);
 
         return new Promise((resolve, reject) =>{
             fetch(`${process.env.NEXT_PUBLIC_API_HOST}${url}`, {
@@ -49,7 +49,7 @@ const apiService = {
         })
    },
    post: async function(url: string, data: any): Promise<any>{
-        console.log(`Requesting data=${data} [POST] to url=${url}`);
+        console.log(`Requesting data=${data} [POST] to url=${process.env.NEXT_PUBLIC_API_HOST}${url}`);
         
         const token = await getAccessToken()
         
