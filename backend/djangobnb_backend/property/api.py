@@ -11,7 +11,13 @@ from .serializers import PropertiesListSerializer, PropertiesDetailSerializer, R
 @authentication_classes([])
 @permission_classes([])
 def properties_list(request):
+    """ List all the properties """
     properties = Property.objects.all()
+
+    # host_id is coming like this ->
+    if host_id := request.GET.get('host_id', ''):
+        properties = properties.filter(host_id=host_id)
+
     serializer = PropertiesListSerializer(properties, many=True)
 
     return JsonResponse({

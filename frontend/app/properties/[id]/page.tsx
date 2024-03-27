@@ -2,19 +2,8 @@ import Image from "next/image";
 import ReservationSidebar from "@/app/components/properties/ReservationSidebar";
 import apiService from "@/app/services/apiService";
 import { getUserId } from "@/app/lib/actions";
+import Link from "next/link";
 
-// export type PropertyType = {
-//     id: string
-//     title: string
-//     description: string
-//     price_per_night: string
-//     image_url: string
-//     bedrooms: string
-//     bathrooms: string
-//     guests: string
-//     country: string
-//     host: string
-// }
 
 const PropertyDetailPage = async ({params}: { params: {id: string }}) => {
     // Content shown accesing to /properties/id_property
@@ -49,12 +38,15 @@ const PropertyDetailPage = async ({params}: { params: {id: string }}) => {
                         {/* HOSTNAME INFORMATION */}
                         <div className="py-6 flex items-center space-x-4">
                             {/* { property.host.avatar_url && ()} */}
-                            <Image className="rounded-full" width={50} height={50}
-                                   alt="The user name" src={`${property.host.avatar_url ? `${property.host.avatar_url}` : '/profile_pic.png'}`}
-                                   />
-                            <p>
-                                <b>{property.host.name}</b> is your host
-                            </p>
+                            <Link 
+                                className='py-6 flex items-center space-x-4'
+                                href={`/hosts/${property.host.id}`}
+                            >
+                                <Image className="rounded-full" width={50} height={50}
+                                    alt="The user name" src={`${property.host.avatar_url ? `${property.host.avatar_url}` : '/profile_pic.png'}`}
+                                />
+                            </Link>
+                            <p><b>{property.host.name[0].toUpperCase() + property.host.name.slice(1)}</b> is your host</p>
                         </div>
                         {/* END HOSTNAME INFORMATION */}
 

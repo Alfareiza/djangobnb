@@ -11,7 +11,13 @@ export type PropertyType = {
     title: string;
 }
 
-const PropertyList = () => {
+interface PropertyListProps {
+    host_id? : string | null
+}
+
+const PropertyList: React.FC<PropertyListProps> = ({
+    host_id
+}) => {
     // Content shown accessing to /properties/
     // Here, the API is called in order to get all the properties and 
     // show them in the front trough PropertyListItem
@@ -19,7 +25,12 @@ const PropertyList = () => {
     const [properties, setProperties] = useState<PropertyType[]>([]);
 
     const getProperties = async () => {
-        const tmpProperties = await apiService.get('/api/properties/');
+        let url = '/api/properties/'
+        if (host_id){
+            url += `?host_id=${host_id}`
+        }
+
+        const tmpProperties = await apiService.get(url);
         setProperties(tmpProperties.data);
     }
 
