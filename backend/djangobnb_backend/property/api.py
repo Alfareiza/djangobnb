@@ -14,6 +14,9 @@ from .serializers import PropertiesListSerializer, PropertiesDetailSerializer, R
 @permission_classes([])
 def properties_list(request):
     """ List all the properties """
+
+    # This is necessary because only logged users can
+    # fav a property
     try:
         token = request.META['HTTP_AUTHORIZATION'].split('Bearer ')[1]
         token = AccessToken(token)
@@ -25,10 +28,11 @@ def properties_list(request):
     favorites = []
     properties = Property.objects.all()
 
-    # host_id is coming like this ->
+    # host_id is coming like this -> /api/properties/?host_id=efba70a3
     if host_id := request.GET.get('host_id', ''):
         properties = properties.filter(host_id=host_id)
 
+    # If the user is logged, so he can fav a property
     if user:
         for property in properties:
             if user in property.favorited.all():
