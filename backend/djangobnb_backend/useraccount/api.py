@@ -16,3 +16,11 @@ def host_detail(request, pk):
     serializer = UserDetailSerializer(user, many=False)
 
     return JsonResponse(serializer.data, safe=False)
+
+@api_view(['GET'])
+def reservations_list(request):
+    """ List the reservations """
+    reservations = request.user.reservations.all()
+    serializer = ReservationsListSerializer(reservations, many=True)
+
+    return JsonResponse(serializer.data, safe=False)
