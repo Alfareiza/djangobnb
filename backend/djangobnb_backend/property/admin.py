@@ -10,7 +10,11 @@ class PropertyAdmin(admin.ModelAdmin):
     search_fields = ['title', 'category', 'country']
 
 @admin.register(Reservation)
-class PropertyAdmin(admin.ModelAdmin):
-    list_display = ['property', 'start_date', 'end_date', 'number_of_nights', 'guests', 'total_price']
+class ReservationAdmin(admin.ModelAdmin):
+    list_display = ['property_title', 'start_date', 'end_date', 'number_of_nights', 'guests', 'total_price']
     list_filter = ['created_by', 'property']
     search_fields = ['created_by', 'property']
+
+    @admin.display(ordering="property__title")
+    def property_title(self, obj):
+        return obj.property.title
