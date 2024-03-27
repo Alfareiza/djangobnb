@@ -5,6 +5,7 @@ import MenuLink from './MenuLink'
 import LogoutButton from '@/app/components/LogoutButton'
 import useLoginModal from '@/app/hooks/useLoginModal'
 import useSignupModal from '@/app/hooks/useSignupModal'
+import {useRouter} from 'next/navigation'
 
 interface UserNavProps {
     userId?: string | null; // This indicates that the value may comes or not
@@ -13,6 +14,7 @@ interface UserNavProps {
 const UserNav: React.FC<UserNavProps> = ({
     userId
 }) => {
+    const router = useRouter()
     const loginModal = useLoginModal();
     const signupModal = useSignupModal();
 
@@ -33,11 +35,20 @@ const UserNav: React.FC<UserNavProps> = ({
                 </button>
                 {/* END ICONS OF MENU OF HEADER */}
 
+                
+                {/* END INFO WITHIN MENU */}
                 {isOpen && (
                     <div className="w-[200px] py-3 absolute top-[60px] right-0 bg-white border rounded-xl shadow-md flex flex-col cursor-pointer">
                         {/* If the userId is found in the cookies then is shown the log out button */}
                         { userId ? (
-                            <LogoutButton/>
+                            <>
+                                <MenuLink label='My properties' onClick={() => {
+                                    setIsOpen(false);
+                                    router.push('/myproperties')
+                                    }}
+                                />
+                                <LogoutButton/>
+                            </>
                         ) : (
                             <>
                                 <MenuLink label='Log in' onClick={() => {
@@ -59,6 +70,7 @@ const UserNav: React.FC<UserNavProps> = ({
                         <MenuLink label='Help Center'  onClick={() => console.log('Clicked')} className="mt-2"/>
                     </div>
                 )}
+                {/* END INFO WITHIN MENU */}
 
             </div>
     )
